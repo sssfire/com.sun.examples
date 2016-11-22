@@ -3,6 +3,7 @@ package com.sun.example.designpattern.singleton2;
 /**
  * 
  * - 线程安全的单例模式
+ * - 检查输出是否有不同的类实例
  * 
  */
 

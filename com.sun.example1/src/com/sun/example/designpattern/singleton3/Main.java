@@ -3,6 +3,7 @@ package com.sun.example.designpattern.singleton3;
 /**
  * 
  * - 使用内部静态类实现单利模式
+ * - 检查输出是否有不同的类实例
  * 
  */
 

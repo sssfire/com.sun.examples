@@ -5,8 +5,8 @@ package com.sun.example.java.generictype;
  * 1. 泛型类型只会在编译阶段进行检查，编译完后的字节码会“擦除”掉泛型的类型信息，把他们变成相同的基本类型。
  * 2. 泛型可以用在接口，类和函数的参数上面，相应的可以分为泛型接口，泛型类和泛型方法
  * 3. 泛型方法中的泛型参数可以传入泛型类型的子类
- * 4. 泛型方法中使用<? extends Food>定义通配符上限泛型参数，该参数只能传入泛型类型的子类和本身
- * 5. 泛型方法中使用<? super Apple>定义通配符下限泛型参数，该参数只能传入泛型类型的父类和本身
+ * 4. 泛型方法中使用<? extends Food>定义上界通配符泛型参数，该参数只能传入泛型类型的子类和本身
+ * 5. 泛型方法中使用<? super Apple>定义下界通配符泛型参数，该参数只能传入泛型类型的父类和本身
  */
 public class GenericTypeDemo {
 	
@@ -41,8 +41,8 @@ public class GenericTypeDemo {
 		//o = app.getFoodInPlate(plate5); //编译错误，RedApple是Apple的子类，而非父类
 		//o = app.getFoodInPlate(plate2); //编译错误，Meat不是Apple的父类
 		
-		//下面的形式定义通配符上限不能设置值
-		//下面的形式定义通配符下限不能得到值
+		//下面的形式定义上界通配符不能设置值
+		//下面的形式定义下界通配符不能得到值
 	}
 	
 	//定义通配符上限
@@ -72,6 +72,16 @@ public class GenericTypeDemo {
 		
 	}
 	
+	/**
+	 * 继承关系
+	 * Food <= Fruit <= Apple <= RedApple
+	 * 						  <= GreenApple
+	 *               <= Banana
+	 *      <= Meat  <= Pork
+	 *               <= Beef
+	 * @author sssfire
+	 *
+	 */
 	
 	class Food{}
 	

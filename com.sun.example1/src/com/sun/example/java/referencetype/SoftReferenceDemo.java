@@ -1,11 +1,16 @@
 package com.sun.example.java.referencetype;
 
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.SoftReference;
 import java.lang.ref.WeakReference;
 import java.util.Hashtable;
 import java.util.Random;
 
+/**
+ * 有问题！！在取得EM数据的时候，应该随机生成，并且id的范围要大于内存能够容纳的范围。
+ * 修改get方法以随机在某个ID范围取得数据，然后插入缓存
+ * @author I068353
+ *
+ */
 public class SoftReferenceDemo {
 	
 	Hashtable<String, EmployeeReference> employeeCache = new Hashtable<String, EmployeeReference>();
@@ -13,15 +18,16 @@ public class SoftReferenceDemo {
 	
 	//模拟数据库
 	Hashtable<String, Employee> emDatabase = new Hashtable<String, Employee>();
-	final static int employNum = 100000000;
+	final static int employNum = 1000;
 	
 	public static void main(String[] args) {
 		SoftReferenceDemo refDemo = new SoftReferenceDemo();
 		
-		for(int i=0;i<employNum;i++){
+		while(true){
 			Random rand = new Random();
 			String key = (rand.nextInt(employNum) + 1) + "";
 			Employee em = refDemo.get(key);
+			System.out.println(em.getName());
 			//System.out.println(em);
 //			if( i%(employNum/10) == 0 ){
 //				System.out.println("System GC...");
@@ -32,6 +38,7 @@ public class SoftReferenceDemo {
 	
 	public SoftReferenceDemo() {
 		initalEmployeeData(employNum);
+		System.out.println("Employee初始化完毕");
 	}
 	
 	public void put(Employee em){

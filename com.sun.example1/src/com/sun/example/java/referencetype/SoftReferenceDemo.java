@@ -1,13 +1,24 @@
 package com.sun.example.java.referencetype;
 
 import java.lang.ref.ReferenceQueue;
-import java.lang.ref.WeakReference;
+import java.lang.ref.SoftReference;
 import java.util.Hashtable;
 import java.util.Random;
 
 /**
- * 有问题！！在取得EM数据的时候，应该随机生成，并且id的范围要大于内存能够容纳的范围。
- * 修改get方法以随机在某个ID范围取得数据，然后插入缓存
+ * 1. Java存在四种类型的引用，StrongReference，SoftReference，WeakReference和PhantomReference，
+ *    在JVM进行垃圾回收时不同的引用回收策略各不相同
+ * - StrongReference，就是一般的引用，如果对象存在StrongReference，则无论如何JVM都不会回收该对象
+ * - SoftReference，软引用，JVM在GC时如果Heap空间不够，才会回收软引用的对象，否则不会回收。
+ * - WeakReference，弱引用，JVM在GC时所有弱引用对象会被回收，不管Heap空间够不够。
+ * - PhantomReference, 虚引用，相当于没有引用，JVM在GC时会回收该引用对象，虚引用可追踪对象回收情况。
+ * 2. 软引用可用于一些系统缓存的处理
+ * 3. 使用ReferenceQueue可以跟踪被回收的对象. 当Reference对象初始化时，构造参数中包含ReferenceQueue，
+ *    则对象被回收时将记录到该Queue中。使用poll方法可弹出Reference对象。
+ * 3. 下面的Demo中，把从数据库中查出来的数据放入cache中，cache中存放软引用对象以便内存不足时JVM可以回收。
+ *    这样可以加速查询效率而又不必担心内存不足引起OOM问题。
+ * 4. 虚拟机参数设置如下，减小Heap内存可以更容易验证：
+ *    -Xms10m -Xmx10m
  * @author I068353
  *
  */
@@ -15,19 +26,17 @@ public class SoftReferenceDemo {
 	
 	Hashtable<String, EmployeeReference> employeeCache = new Hashtable<String, EmployeeReference>();
 	ReferenceQueue<Employee> refQueue = new  ReferenceQueue<Employee>();
-	
-	//模拟数据库
-	Hashtable<String, Employee> emDatabase = new Hashtable<String, Employee>();
-	final static int employNum = 1000;
+
+	final static int employNum = 100000;
 	
 	public static void main(String[] args) {
 		SoftReferenceDemo refDemo = new SoftReferenceDemo();
 		
 		while(true){
 			Random rand = new Random();
-			String key = (rand.nextInt(employNum) + 1) + "";
+			String key = rand.nextInt(employNum) + "";
 			Employee em = refDemo.get(key);
-			System.out.println(em.getName());
+			//System.out.println(em.getName());
 			//System.out.println(em);
 //			if( i%(employNum/10) == 0 ){
 //				System.out.println("System GC...");
@@ -35,12 +44,7 @@ public class SoftReferenceDemo {
 //			}
 		}
 	}
-	
-	public SoftReferenceDemo() {
-		initalEmployeeData(employNum);
-		System.out.println("Employee初始化完毕");
-	}
-	
+
 	public void put(Employee em){
 		EmployeeReference empRef = new EmployeeReference(em, refQueue);
 		employeeCache.put(em.getId(), empRef);
@@ -69,9 +73,12 @@ public class SoftReferenceDemo {
 	}
 	
 	
-	//模拟数据库操作
+	//模拟数据库操作，随机生成一个Employee
 	private Employee getEmployeeFromDatabase(String employeeID){
-		return emDatabase.get(employeeID);
+		Random rand = new Random();
+		String id = String.valueOf(rand.nextInt(employNum));
+		Employee em = new Employee(""+id, "name-"+id, rand.nextInt(22)+30);
+		return em;
 	}
 	
 	private void cleanCache(){
@@ -83,17 +90,7 @@ public class SoftReferenceDemo {
 		}
 	}
 	
-	//创建模拟数据
-	private void initalEmployeeData(int number){
-		Random random = new Random();
-		for(int i=1;i<number+1;i++){
-			int age = random.nextInt(22) + 30; 
-			Employee em = new Employee(""+i, "name-"+i, age);
-			emDatabase.put(em.getId(), em);
-		}
-	}
-
-	class EmployeeReference extends WeakReference<Employee>{
+	class EmployeeReference extends SoftReference<Employee>{
 
 		private String key;
 		

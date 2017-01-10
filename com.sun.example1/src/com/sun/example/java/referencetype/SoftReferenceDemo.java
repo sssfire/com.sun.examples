@@ -19,6 +19,7 @@ import java.util.Random;
  *    这样可以加速查询效率而又不必担心内存不足引起OOM问题。
  * 4. 虚拟机参数设置如下，减小Heap内存可以更容易验证：
  *    -Xms10m -Xmx10m
+ * 5. 也可以把SoftReference改为WeakReference以看到更明显的效果
  * @author I068353
  *
  */

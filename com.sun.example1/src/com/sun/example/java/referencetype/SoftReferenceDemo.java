@@ -30,26 +30,20 @@ public class SoftReferenceDemo {
 
 	final static int employNum = 100000;
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
 		SoftReferenceDemo refDemo = new SoftReferenceDemo();
-		
+		Thread.sleep(5000);
 		while(true){
 			Random rand = new Random();
 			String key = rand.nextInt(employNum) + "";
 			Employee em = refDemo.get(key);
-			//System.out.println(em.getName());
-			//System.out.println(em);
-//			if( i%(employNum/10) == 0 ){
-//				System.out.println("System GC...");
-//				System.gc();
-//			}
+			Thread.sleep(1);
 		}
 	}
 
 	public void put(Employee em){
 		EmployeeReference empRef = new EmployeeReference(em, refQueue);
 		employeeCache.put(em.getId(), empRef);
-		//System.out.println("Put ID: " + em.getId());
 	}
 	
 	public Employee get(String employeeID){

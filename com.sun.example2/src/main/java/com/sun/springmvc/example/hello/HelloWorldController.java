@@ -14,15 +14,14 @@ public class HelloWorldController implements Controller{
 	public ModelAndView handleRequest(HttpServletRequest arg0,
 			HttpServletResponse arg1) throws Exception {
 		
-		System.out.println("-------hello tgb-----");
+		System.out.println("-------hello world-----");
 		
-		String hello = "lsh hello 提高班";
 		Map<String,Object> map = new HashMap<String,Object>();
-		map.put("map1", "提高班1");
-		map.put("map2", "提高班2");
-		map.put("map3", "提高班3");
+		map.put("key1", "Green");
+		map.put("key2", "Red");
+		map.put("key3", "Yello");
 		
-		return new ModelAndView("/welcome","map",map);
+		return new ModelAndView("/hello/welcome","map",map);
 		
 	}
 

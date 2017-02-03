@@ -11,36 +11,24 @@
       http://www.springframework.org/schema/mvc
       http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
 	
-	<!-- 单独的视图控制器 -->
-	<bean name="/test1/helloworld" class="com.sun.springmvc.example.hello.HelloWorldController" />
+	<!-- 开启注解 -->
+	<mvc:annotation-driven /> 
 	
-	<!-- MultiController的用法 -->
-	<bean name="/test1/multi" class="com.sun.springmvc.example.hello.MultiController">
-		<property name="methodNameResolver">
-			<ref bean="paramMethodResolver"/>
-		</property>
-	</bean>
-	
-	<!-- 静态资源访问控制器，如果web.xml的拦截请求只拦截*.do文件，下面的静态资源文件配置部分就不用配置了，但所有的控制器都要加do后缀才能被拦截到 -->
-	<bean name="/test1/img.do" class="com.sun.springmvc.example.hello.StaticController">
-		<property name="methodNameResolver">
-			<ref bean="paramMethodResolver"/>
-		</property>
-	</bean>
-
-	<!-- 解析URL中的参数 -->
-	<bean id="paramMethodResolver" class="org.springframework.web.servlet.mvc.multiaction.ParameterMethodNameResolver">
-		<!-- 参数调用形式为：http://localhost:8080/sun.springMVC1/test1/multi?action=update，其中“action”可以任意命名 -->
-		<property name="paramName" value="action"></property>
-	</bean>
+	<!-- 注解扫描，指定扫描包以及子包 -->
+	<context:component-scan 
+		base-package="com.sun.springmvc.example"></context:component-scan>
 	
 	<!-- 访问的静态资源位置，设置之后这些目录下的文件请求就不作为控制器进行处理了 -->
 	<mvc:resources location="/img/" mapping="/img/**"/>  
 	<mvc:resources location="/js/" mapping="/js/**"/>
-
-	<!-- 视图解析器-->
+	
+	<!-- 配置视图解析器-->
 	<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<property name="prefix" value="/"></property>
 		<property name="suffix" value=".jsp"></property>
 	</bean>
+	
+	<!-- 单独的视图控制器 -->
+	<bean name="/hello/helloworld" class="com.sun.springmvc.example.hello.HelloWorldController" />
+	
 </beans>  

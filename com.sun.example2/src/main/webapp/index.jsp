@@ -15,6 +15,18 @@
 	<tr>
 		<td><a href="login/register">用户登录的一个简单例子</a></td>
 	</tr>
+	<tr>
+		<td><a href="login/test">测试@PathVariable：绑定test用户至控制器函数入参</a></td>
+	</tr>
+	<tr>
+		<td><a href="login/test123">测试@PathVariable：绑定test123用户至控制器函数入参</a></td>
+	</tr>
+	<tr>
+		<td><a href="login/test/testProfile">测试@PathVariable：绑定test用户，testProfile用户文件至控制器入参</a></td>
+	</tr>
+	<tr>
+		<td><a href="login/test123/testProfile123">测试@PathVariable：绑定test123用户，testProfile123用户文件至控制器入参</a></td>
+	</tr>	
 </table>
 </body>
 </html>

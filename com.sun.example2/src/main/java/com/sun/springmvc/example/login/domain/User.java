@@ -1,9 +1,12 @@
 package com.sun.springmvc.example.login.domain;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 public class User {
 	private String userName;
 	private String password;
 	private String realName;
+	private ConcurrentHashMap<String, Profile> profilehm = new ConcurrentHashMap<String, Profile>();
 	
 	public String getUserName() {
 		return userName;
@@ -22,5 +25,15 @@ public class User {
 	}
 	public void setRealName(String realName) {
 		this.realName = realName;
+	}
+	
+	public void setProfile(Profile profile){
+		if(profile!=null){
+			profilehm.put(profile.getProfileName(), profile);
+		}
+	}
+	
+	public Profile getProfile(String profileName){
+		return profilehm.get(profileName);
 	}
 }

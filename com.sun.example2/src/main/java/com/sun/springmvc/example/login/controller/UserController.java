@@ -24,7 +24,7 @@ import com.sun.springmvc.example.login.service.UserService;
  */
 
 /**
- * 1. @Controller， 所有的处理请求控制器必须使用该注解进行标注，控制器会自动把
+ * 1. @Controller， 所有的处理请求控制器必须使用该注解进行标注，在通过配置文件<context:component-scan/>控制器会自动把
  *    该类解析为一个处理请求控制器类
  * 2. @RequestMapping，标注该类处理来自/login URI的请求。
  *    - 在类中所标注的URL是相对于Web应用的部署路径。在"类"中进行标注不是必须的。

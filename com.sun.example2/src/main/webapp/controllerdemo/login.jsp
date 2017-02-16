@@ -34,6 +34,14 @@
 				<td><input type="Checkbox" name="http_servlet_response"/></td>
 			</tr>
 			<tr>
+				<td>Using HttpSession：</td>
+				<td><input type="Checkbox" name="http_session"/></td>
+			</tr>
+			<tr>
+				<td>Using WebRequest：</td>
+				<td><input type="Checkbox" name="web_request"/></td>
+			</tr>
+			<tr>
 				<td colspan="2"><input type="submit" name="提交"/></td>
 			</tr>		
 		</table>

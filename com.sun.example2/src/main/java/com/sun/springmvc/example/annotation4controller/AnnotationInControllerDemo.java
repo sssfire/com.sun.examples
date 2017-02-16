@@ -1,17 +1,30 @@
 package com.sun.springmvc.example.annotation4controller;
 
 import java.io.IOException;
+import java.io.OutputStream;
+import java.net.URL;
+import java.security.Principal;
+import java.util.Locale;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.CookieValue;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.WebRequest;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.WebUtils;
 
@@ -190,5 +203,82 @@ public class AnnotationInControllerDemo {
 		return mav;
 	}
 	
+	/**
+	 * 1. 演示如何使用HttpSession
+	 * 2. 演示Servlet内部对象可以和@RequestParam混用
+	 * URL: /controllerdemo/login, 仅仅选择Use HttpSession
+	 */
+	@RequestMapping(value="/showMessage", params={"userName","password", "!http_servlet_request","!http_servlet_response","http_session"})
+	public ModelAndView showMessage8(HttpSession httpSession, @RequestParam("userName") String userName) throws IOException{
+		
+		String serverInfo = httpSession.getServletContext().getServerInfo();
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("controllerdemo/showMessage");
+		String message = "Using HttpSession, userName is " + userName + " and server information is " + serverInfo;
+		mav.addObject("message", message);
+		return mav;
+	}
 	
+	/**
+	 * 1. 演示如何使用WebRequest
+	 * 2. 在org.springframework.web.context.request中定义了若干可代理Servlet原生API的接口，如WebRequest，NativeWebRequest，他们也可以作为参数访问
+	 * URL: /controllerdemo/login, 仅仅选择Use WebRequest
+	 */
+	@RequestMapping(value="/showMessage", params={"userName","password", "!http_servlet_request","!http_servlet_response","!http_session","web_request"})
+	public ModelAndView showMessage9(WebRequest request) throws IOException{
+		
+		String userName = request.getParameter("userName");
+		String password = request.getParameter("password");
+		String realName = request.getParameter("realName");
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("controllerdemo/showMessage");
+		String message = "The information comes from login page is as following:<br>"
+				+ "param - userName: " + userName + "<br>"
+				+ "param - password: " + password + "<br>"
+				+ "param - realName: " + realName + "<br>";
+		
+		mav.addObject("message", message);
+		return mav;
+	}
+	
+	/**
+	 * 1. 演示如何使用IO对象作为参数
+	 * 2. 输出一张图片
+	 * URL: /controllerdemo/showImage
+	 */
+	@RequestMapping(value="/showImage")
+	public void showImage(OutputStream os, HttpSession session) throws IOException{
+		URL url = session.getServletContext().getResource("/img/a.png");
+		Resource res = new UrlResource(url);
+		FileCopyUtils.copy(res.getInputStream(), os);
+	}
+	
+	/**
+	 * 控制函数的入参还可以使用下列类型为参数，SpringMVC将进行自动赋值：
+	 * 1. java.util.Locale
+	 * 2. java.security.Principal
+	 * URL: /controllerdemo/showLocaleAndPrincipal
+	 */
+	@RequestMapping(value="/showLocaleAndPrincipal")
+	public ModelAndView showMessage10(Locale locale, Principal principal) throws IOException{
+		
+		String localeInfo = locale.toString();
+		String principalInfo;
+		if(principal == null){
+			principalInfo = "empty information";
+		}else{
+			principalInfo = principal.getName() + ":" + principal.toString();
+		}
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("controllerdemo/showMessage");
+		String message = "The locale and principal information is as below:<br>"
+				+ "locale: " + localeInfo + "<br>"
+				+ "principal: " + principalInfo + "<br>";
+		
+		mav.addObject("message", message);
+		return mav;
+	}
 }

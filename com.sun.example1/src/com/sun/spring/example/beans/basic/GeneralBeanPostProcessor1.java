@@ -6,9 +6,9 @@ import org.springframework.beans.factory.config.BeanPostProcessor;
 public class GeneralBeanPostProcessor1 implements BeanPostProcessor {
 
 	/**
-	 * ÔÚinit-method·½·¨Ç°±»µ÷ÓÃ
-	 * bean: ¾ßÌåµ÷ÓÃµÄbean
-	 * beanName: ¾ßÌåµ÷ÓÃµÄbeanµÄÃû³Æ
+	 * åœ¨init-methodæ–¹æ³•å‰è¢«è°ƒç”¨
+	 * bean: å…·ä½“è°ƒç”¨çš„bean
+	 * beanName: å…·ä½“è°ƒç”¨çš„beançš„åç§°
 	 * 
 	 */
 	@Override
@@ -23,9 +23,9 @@ public class GeneralBeanPostProcessor1 implements BeanPostProcessor {
 	}
 
 	/**
-	 * ÔÚinit-method·½·¨ºó±»µ÷ÓÃ
-	 * bean: ¾ßÌåµ÷ÓÃµÄbean
-	 * beanName: ¾ßÌåµ÷ÓÃµÄbeanµÄÃû³Æ
+	 * åœ¨init-methodæ–¹æ³•åè¢«è°ƒç”¨
+	 * bean: å…·ä½“è°ƒç”¨çš„bean
+	 * beanName: å…·ä½“è°ƒç”¨çš„beançš„åç§°
 	 */
 	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {

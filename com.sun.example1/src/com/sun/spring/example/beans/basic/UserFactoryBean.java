@@ -5,21 +5,21 @@ import org.springframework.beans.factory.FactoryBean;
 public class UserFactoryBean implements FactoryBean<User> {
 
 	/**
-	 * ·µ»ØbeanµÄÊµÀı
+	 * è¿”å›beançš„å®ä¾‹
 	 */
 	@Override
 	public User getObject() throws Exception {
 		User user = new User();
 		user.setName("User7");
-		user.setRealName("Ğ¡ÅÖ×Ó");
+		user.setRealName("å°èƒ–å­");
 		user.setLevel(10);
-		user.setDescription("Ğ¡ÅÖ×ÓÈË¼ûÈË°®£¬»¨¼û»¨¿ª");
+		user.setDescription("å°èƒ–å­äººè§äººçˆ±ï¼ŒèŠ±è§èŠ±å¼€");
 		
 		return user;
 	}
 
 	/**
-	 * ·µ»ØbeanµÄÀàĞÍ
+	 * è¿”å›beançš„ç±»å‹
 	 */
 	@Override
 	public Class<?> getObjectType() {
@@ -27,7 +27,7 @@ public class UserFactoryBean implements FactoryBean<User> {
 	}
 
 	/**
-	 * ·µ»ØbeanÊÇ·ñÊÇµ¥Àı
+	 * è¿”å›beanæ˜¯å¦æ˜¯å•ä¾‹
 	 */
 	@Override
 	public boolean isSingleton() {

@@ -38,20 +38,20 @@ public class LoggingAspect {
 		String methodName = pjp.getSignature().getName();
 		
 		try{
-			//前置通知
+			//鍓嶇疆閫氱煡
 			System.out.println("Aound method ==> The before method '" +methodName+ "' begin with " + Arrays.asList(pjp.getArgs()));
 			
-			//执行方法
+			//鎵ц鏂规硶
 			result = pjp.proceed();
 			
-			//后置通知
+			//鍚庣疆閫氱煡
 			System.out.println("Aound method ==> The after method '" +methodName+ "' result: " + result);
 		}catch(Throwable e){
-			//异常通知
+			//寮傚父閫氱煡
 			System.out.println("Aound method ==> The after throwing method '" +methodName+ "' exception: " + e.toString());
 		}
 		
-		//返回通知
+		//杩斿洖閫氱煡
 		System.out.println("Aound method ==> The returning method '" + methodName + "'");
 		
 		return result;

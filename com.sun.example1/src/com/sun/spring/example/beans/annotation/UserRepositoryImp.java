@@ -6,7 +6,7 @@ import org.springframework.stereotype.Repository;
 import com.sun.spring.example.beans.basic.User;
 
 /**
- * ÏÔÊ¾Ìá¹©beanµÄÃû³Æ£¬Èç¹û²»¼Óvalue£¬ÔòbeanµÄÃû×ÖÎªÊ××ÖÄ¸Ğ¡Ğ´µÄclassÃû³Æ¡£
+ * æ˜¾ç¤ºæä¾›beançš„åç§°ï¼Œå¦‚æœä¸åŠ valueï¼Œåˆ™beançš„åå­—ä¸ºé¦–å­—æ¯å°å†™çš„classåç§°ã€‚
  */
 //@Repository(value="userRepository")
 @Repository("userRepository")
@@ -14,11 +14,11 @@ public class UserRepositoryImp implements UserRepository{
 
 	/**
 	 * @Autowired(required=false) 
-	 * Èç¹ûrequired=false£¬ÔòÖ¸Ã÷Èç¹ûIOCÈİÆ÷ÖĞÓĞ¶ÔÏó£¬Ôò×°Åä£¬Ã»ÓĞÔò²»±Ø×Ô¶¯×°Åä£»
-	 * Èç¹ûrequired=true£¬Ôò¸ÃÊôĞÔ±ØĞë½øĞĞ×°Åä£¬Èç¹ûIOCÈİÆ÷ÖĞÕÒ²»µ½ÏàÓ¦¶ÔÏóÔò»á±¨´í¡£
-	 * ×Ô¶¯×°ÅäµÄ¹æÔòÎª£º
-	 * Ê×ÏÈ¸ù¾İ±äÁ¿/ÊôĞÔµÄÃû×ÖÔÚIOCÈİÆ÷ÖĞÑ°ÕÒÆ¥ÅäµÄbean£¬Èç¹ûÃ»ÓĞÔò¸ù¾İÀàĞÍ½øĞĞ×°Åä¡£
-	 * Èç¹ûÍ¬Ò»ÀàĞÍµÄbeanÓĞ¶à¸öÊµÀı£¬Ôò×Ô¶¯×°Åä³ö´í£¡
+	 * å¦‚æœrequired=falseï¼Œåˆ™æŒ‡æ˜å¦‚æœIOCå®¹å™¨ä¸­æœ‰å¯¹è±¡ï¼Œåˆ™è£…é…ï¼Œæ²¡æœ‰åˆ™ä¸å¿…è‡ªåŠ¨è£…é…ï¼›
+	 * å¦‚æœrequired=trueï¼Œåˆ™è¯¥å±æ€§å¿…é¡»è¿›è¡Œè£…é…ï¼Œå¦‚æœIOCå®¹å™¨ä¸­æ‰¾ä¸åˆ°ç›¸åº”å¯¹è±¡åˆ™ä¼šæŠ¥é”™ã€‚
+	 * è‡ªåŠ¨è£…é…çš„è§„åˆ™ä¸ºï¼š
+	 * é¦–å…ˆæ ¹æ®å˜é‡/å±æ€§çš„åå­—åœ¨IOCå®¹å™¨ä¸­å¯»æ‰¾åŒ¹é…çš„beanï¼Œå¦‚æœæ²¡æœ‰åˆ™æ ¹æ®ç±»å‹è¿›è¡Œè£…é…ã€‚
+	 * å¦‚æœåŒä¸€ç±»å‹çš„beanæœ‰å¤šä¸ªå®ä¾‹ï¼Œåˆ™è‡ªåŠ¨è£…é…å‡ºé”™ï¼
 	 */
 	@Autowired(required=false)
 	private User user;

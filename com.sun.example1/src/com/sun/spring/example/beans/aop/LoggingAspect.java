@@ -18,53 +18,53 @@ import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 /**
- * AOP µÄ helloWorld
- * 1. ¼ÓÈë jar °ü
+ * AOP çš„ helloWorld
+ * 1. åŠ å…¥ jar åŒ…
  * com.springsource.org.aopalliance-1.0.0.jar
  * com.springsource.org.aspectj.weaver-1.6.8.RELEASE.jar
  * spring-aspects-4.0.0.RELEASE.jar
  * 
- * 2. ÔÚ Spring µÄÅäÖÃÎÄ¼şÖĞ¼ÓÈë aop µÄÃüÃû¿Õ¼ä¡£ 
+ * 2. åœ¨ Spring çš„é…ç½®æ–‡ä»¶ä¸­åŠ å…¥ aop çš„å‘½åç©ºé—´ã€‚ 
  * 
- * 3. »ùÓÚ×¢½âµÄ·½Ê½À´Ê¹ÓÃ AOP
- * 3.1 ÔÚÅäÖÃÎÄ¼şÖĞÅäÖÃ×Ô¶¯É¨ÃèµÄ°ü: <context:component-scan base-package="com.atguigu.spring.aop"></context:component-scan>
- * 3.2 ¼ÓÈëÊ¹ AspjectJ ×¢½âÆğ×÷ÓÃµÄÅäÖÃ: <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
- * ÎªÆ¥ÅäµÄÀà×Ô¶¯Éú³É¶¯Ì¬´úÀí¶ÔÏó. 
+ * 3. åŸºäºæ³¨è§£çš„æ–¹å¼æ¥ä½¿ç”¨ AOP
+ * 3.1 åœ¨é…ç½®æ–‡ä»¶ä¸­é…ç½®è‡ªåŠ¨æ‰«æçš„åŒ…: <context:component-scan base-package="com.atguigu.spring.aop"></context:component-scan>
+ * 3.2 åŠ å…¥ä½¿ AspjectJ æ³¨è§£èµ·ä½œç”¨çš„é…ç½®: <aop:aspectj-autoproxy></aop:aspectj-autoproxy>
+ * ä¸ºåŒ¹é…çš„ç±»è‡ªåŠ¨ç”ŸæˆåŠ¨æ€ä»£ç†å¯¹è±¡. 
  * 
- * 4. ±àĞ´ÇĞÃæÀà: 
- * 4.1 Ò»¸öÒ»°ãµÄ Java Àà
- * 4.2 ÔÚÆäÖĞÌí¼ÓÒª¶îÍâÊµÏÖµÄ¹¦ÄÜ. 
+ * 4. ç¼–å†™åˆ‡é¢ç±»: 
+ * 4.1 ä¸€ä¸ªä¸€èˆ¬çš„ Java ç±»
+ * 4.2 åœ¨å…¶ä¸­æ·»åŠ è¦é¢å¤–å®ç°çš„åŠŸèƒ½. 
  *
- * 5. ÅäÖÃÇĞÃæ
- * 5.1 ÇĞÃæ±ØĞëÊÇ IOC ÖĞµÄ bean: Êµ¼ÊÌí¼ÓÁË @Component ×¢½â
- * 5.2 ÉùÃ÷ÊÇÒ»¸öÇĞÃæ: Ìí¼Ó @Aspect
- * 5.3 ÉùÃ÷Í¨Öª: ¼´¶îÍâ¼ÓÈë¹¦ÄÜ¶ÔÓ¦µÄ·½·¨. 
- * 5.3.1 Ç°ÖÃÍ¨Öª:@Before 
- * 5.3.2 ÔÚÍ¨ÖªÖĞ·ÃÎÊÁ¬½ÓÏ¸½Ú: ¿ÉÒÔÔÚÍ¨Öª·½·¨ÖĞÌí¼Ó JoinPoint ÀàĞÍµÄ²ÎÊı, ´ÓÖĞ¿ÉÒÔ·ÃÎÊµ½·½·¨µÄÇ©ÃûºÍ·½·¨µÄ²ÎÊı. 
- * 5.3.3 ºóÖÃÍ¨Öª:@After
- * 5.3.4 ·µ»ØÍ¨Öª:@AfterReturning
- * 5.3.5 Òì³£Í¨Öª:@AfterThrowing
- * 5.3.6 »·ÈÆÍ¨Öª:@Around
- * 5.4 ÉùÃ÷ÇĞµã: @Pointcut Í¨¹ı¶¨ÒåÒ»¸öÇĞµã±äÁ¿£¬¿ÉÒÔÔÚÆäËüµØ·½½øĞĞÒıÓÃ
- * 5.5 ¶¨ÒåÇĞÃæµÄÓÅÏÈ¼¶Ë³Ğò: @Order
+ * 5. é…ç½®åˆ‡é¢
+ * 5.1 åˆ‡é¢å¿…é¡»æ˜¯ IOC ä¸­çš„ bean: å®é™…æ·»åŠ äº† @Component æ³¨è§£
+ * 5.2 å£°æ˜æ˜¯ä¸€ä¸ªåˆ‡é¢: æ·»åŠ  @Aspect
+ * 5.3 å£°æ˜é€šçŸ¥: å³é¢å¤–åŠ å…¥åŠŸèƒ½å¯¹åº”çš„æ–¹æ³•. 
+ * 5.3.1 å‰ç½®é€šçŸ¥:@Before 
+ * 5.3.2 åœ¨é€šçŸ¥ä¸­è®¿é—®è¿æ¥ç»†èŠ‚: å¯ä»¥åœ¨é€šçŸ¥æ–¹æ³•ä¸­æ·»åŠ  JoinPoint ç±»å‹çš„å‚æ•°, ä»ä¸­å¯ä»¥è®¿é—®åˆ°æ–¹æ³•çš„ç­¾åå’Œæ–¹æ³•çš„å‚æ•°. 
+ * 5.3.3 åç½®é€šçŸ¥:@After
+ * 5.3.4 è¿”å›é€šçŸ¥:@AfterReturning
+ * 5.3.5 å¼‚å¸¸é€šçŸ¥:@AfterThrowing
+ * 5.3.6 ç¯ç»•é€šçŸ¥:@Around
+ * 5.4 å£°æ˜åˆ‡ç‚¹: @Pointcut é€šè¿‡å®šä¹‰ä¸€ä¸ªåˆ‡ç‚¹å˜é‡ï¼Œå¯ä»¥åœ¨å…¶å®ƒåœ°æ–¹è¿›è¡Œå¼•ç”¨
+ * 5.5 å®šä¹‰åˆ‡é¢çš„ä¼˜å…ˆçº§é¡ºåº: @Order
  */
 
-@Order(2) //¶¨ÒåÇĞÃæµÄÓÅÏÈ¼¶£¬Êı×ÖÔ½Ğ¡ÓÅÏÈ¼¶Ô½¸ß
-@Aspect //ÉùÃ÷¸ÃÀàÎªÒ»¸öÇĞÃæ
-@Component //ĞèÒª°Ñ¸ÃÀà·ÅÈëµ½IOCÈİÆ÷ÖĞ½øĞĞ¹ÜÀí
+@Order(2) //å®šä¹‰åˆ‡é¢çš„ä¼˜å…ˆçº§ï¼Œæ•°å­—è¶Šå°ä¼˜å…ˆçº§è¶Šé«˜
+@Aspect //å£°æ˜è¯¥ç±»ä¸ºä¸€ä¸ªåˆ‡é¢
+@Component //éœ€è¦æŠŠè¯¥ç±»æ”¾å…¥åˆ°IOCå®¹å™¨ä¸­è¿›è¡Œç®¡ç†
 public class LoggingAspect {
 	
-	 //¶¨ÒåÒ»¸ö·½·¨, ÓÃÓÚÉùÃ÷ÇĞÈëµã±í´ïÊ½. Ò»°ãµØ, ¸Ã·½·¨ÖĞÔÙ²»ĞèÒªÌíÈëÆäËûµÄ´úÂë. 
-	 //Ê¹ÓÃ @Pointcut À´ÉùÃ÷ÇĞÈëµã±í´ïÊ½. 
-	 //ºóÃæµÄÆäËûÍ¨ÖªÖ±½ÓÊ¹ÓÃ·½·¨ÃûÀ´ÒıÓÃµ±Ç°µÄÇĞÈëµã±í´ïÊ½. 
+	 //å®šä¹‰ä¸€ä¸ªæ–¹æ³•, ç”¨äºå£°æ˜åˆ‡å…¥ç‚¹è¡¨è¾¾å¼. ä¸€èˆ¬åœ°, è¯¥æ–¹æ³•ä¸­å†ä¸éœ€è¦æ·»å…¥å…¶ä»–çš„ä»£ç . 
+	 //ä½¿ç”¨ @Pointcut æ¥å£°æ˜åˆ‡å…¥ç‚¹è¡¨è¾¾å¼. 
+	 //åé¢çš„å…¶ä»–é€šçŸ¥ç›´æ¥ä½¿ç”¨æ–¹æ³•åæ¥å¼•ç”¨å½“å‰çš„åˆ‡å…¥ç‚¹è¡¨è¾¾å¼. 
 	@Pointcut("execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))")
 	public void declearPointcutExpression1(){}
-	//ÔÚÒ»¸öÇĞÃæÖĞ¶¨Òå¶à¸öÇĞµã
+	//åœ¨ä¸€ä¸ªåˆ‡é¢ä¸­å®šä¹‰å¤šä¸ªåˆ‡ç‚¹
 	@Pointcut("execution(public double com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))")
 	public void declearPointcutExpression2(){}
 	
-	//ÉùÃ÷¸Ã·½·¨ÊÇÒ»¸öÇ°ÖÃÍ¨Öª£ºÔÚÄ¿±ê·½·¨Ö®Ç°Ö´ĞĞ
-	//ÆäÖĞµÄ±í´ïÊ½ÊÇÇĞÈëµã±í´ïÊ½£¬¿ÉÒÔÊ¹ÓÃÍ¨Åä·û±í´ïÒ»ÀàÇĞµã
+	//å£°æ˜è¯¥æ–¹æ³•æ˜¯ä¸€ä¸ªå‰ç½®é€šçŸ¥ï¼šåœ¨ç›®æ ‡æ–¹æ³•ä¹‹å‰æ‰§è¡Œ
+	//å…¶ä¸­çš„è¡¨è¾¾å¼æ˜¯åˆ‡å…¥ç‚¹è¡¨è¾¾å¼ï¼Œå¯ä»¥ä½¿ç”¨é€šé…ç¬¦è¡¨è¾¾ä¸€ç±»åˆ‡ç‚¹
 	//@Before("execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))")
 	@Before(value = "declearPointcutExpression1() || declearPointcutExpression2()")
 	public void beforeMethod(JoinPoint joinPoint){
@@ -74,8 +74,8 @@ public class LoggingAspect {
 		System.out.println("Before method '" + methodName + "' begin with " + args);
 	}
 	
-	//ÉùÃ÷¸Ã·½·¨ÊÇÒ»¸öºóÖÃÍ¨Öª£¨ºóÖÃÍ¨Öª·ÃÎÊ²»µ½·µ»ØÖµ£©
-	//ÎŞÂÛ·½·¨ÊÇ·ñ·¢ÉúÒì³£¶¼»áÖ´ĞĞºóÖÃÍ¨Öª
+	//å£°æ˜è¯¥æ–¹æ³•æ˜¯ä¸€ä¸ªåç½®é€šçŸ¥ï¼ˆåç½®é€šçŸ¥è®¿é—®ä¸åˆ°è¿”å›å€¼ï¼‰
+	//æ— è®ºæ–¹æ³•æ˜¯å¦å‘ç”Ÿå¼‚å¸¸éƒ½ä¼šæ‰§è¡Œåç½®é€šçŸ¥
 	//@After("execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))")
 	@After(value = "declearPointcutExpression1() || declearPointcutExpression2()")
 	public void afterMethod(JoinPoint joinPoint){
@@ -83,9 +83,9 @@ public class LoggingAspect {
 		System.out.println("After method '" + methodName + "' ends.");
 	}
 	
-	//ÉùÃ÷¸Ã·½·¨ÊÇÒ»¸ö·µ»ØÍ¨Öª
-	//·µ»ØÍ¨ÖªÊÇº¯ÊıÕı³£½áÊøÊ±·ÃÎÊµÄÍ¨Öª£¬Èç¹ûº¯ÊıÖ´ĞĞ³öÏÖÒì³£Ôò²»·ÃÎÊ¸ÃÍ¨Öª
-	//ÔÚÍ¨ÖªÖĞ¿ÉÒÔ·ÃÎÊ·½·¨·µ»ØµÄÖµ
+	//å£°æ˜è¯¥æ–¹æ³•æ˜¯ä¸€ä¸ªè¿”å›é€šçŸ¥
+	//è¿”å›é€šçŸ¥æ˜¯å‡½æ•°æ­£å¸¸ç»“æŸæ—¶è®¿é—®çš„é€šçŸ¥ï¼Œå¦‚æœå‡½æ•°æ‰§è¡Œå‡ºç°å¼‚å¸¸åˆ™ä¸è®¿é—®è¯¥é€šçŸ¥
+	//åœ¨é€šçŸ¥ä¸­å¯ä»¥è®¿é—®æ–¹æ³•è¿”å›çš„å€¼
 	//@AfterReturning(value="execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))",	returning="result")
 	@AfterReturning(value="declearPointcutExpression1() || declearPointcutExpression2()",	returning="result")
 	public void afterReturning(JoinPoint joinPoint, Object result){
@@ -93,10 +93,10 @@ public class LoggingAspect {
 		System.out.println("AfterReturning method '" + methodName + "' ends with return value: " + result);
 	}
 	
-	//ÉùÃ÷¸Ã·½·¨ÊÇÒ»¸öÒì³£Í¨Öª
-	//Òì³£Í¨ÖªÔÚº¯ÊıÅ×³öÒì³£Ê±Ö´ĞĞ
-	//Òì³£Í¨Öª¿ÉÒÔ²¶»ñÅ×³öµÄÒì³£¡£µ«Å×³öµÄÒì³£ÀàĞÍ±ØĞëºÍº¯ÊıÅ×³öµÄÒì³£ÏàÆ¥Åä»òÕßÎª¸¸Àà¶ÔÏó£¬·ñÔòÒì³£Í¨Öª²¶»ñ²»µ½¡£
-	//ÔÚÏÂÃæµÄº¯ÊıÖĞException, ArithmeticException¿ÉÒÔ±»²¶»ñµ½£¬µ«NullPointerException²¶»ñ²»µ½¡£
+	//å£°æ˜è¯¥æ–¹æ³•æ˜¯ä¸€ä¸ªå¼‚å¸¸é€šçŸ¥
+	//å¼‚å¸¸é€šçŸ¥åœ¨å‡½æ•°æŠ›å‡ºå¼‚å¸¸æ—¶æ‰§è¡Œ
+	//å¼‚å¸¸é€šçŸ¥å¯ä»¥æ•è·æŠ›å‡ºçš„å¼‚å¸¸ã€‚ä½†æŠ›å‡ºçš„å¼‚å¸¸ç±»å‹å¿…é¡»å’Œå‡½æ•°æŠ›å‡ºçš„å¼‚å¸¸ç›¸åŒ¹é…æˆ–è€…ä¸ºçˆ¶ç±»å¯¹è±¡ï¼Œå¦åˆ™å¼‚å¸¸é€šçŸ¥æ•è·ä¸åˆ°ã€‚
+	//åœ¨ä¸‹é¢çš„å‡½æ•°ä¸­Exception, ArithmeticExceptionå¯ä»¥è¢«æ•è·åˆ°ï¼Œä½†NullPointerExceptionæ•è·ä¸åˆ°ã€‚
 	//@AfterThrowing(value="execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))",throwing="ex")
 	@AfterThrowing(value="declearPointcutExpression1() || declearPointcutExpression2()", throwing="ex")
 	public void afterThrowing(JoinPoint joinPoint,  ArithmeticException ex){
@@ -106,9 +106,9 @@ public class LoggingAspect {
 		System.out.println("afterThrowing method '" + methodName + "' throw exceptions: " + ex.toString());
 	}
 	
-	//»·ÈÆÍ¨ÖªĞëĞ¯´øProceedingJoinPointÀàĞÍµÄ²ÎÊı
-	//»·ÈÆÍ¨ÖªÀàËÆÓÚ¶¯Ì¬´úÀíµÄÊµÏÖ£ºProceedingJoinPoint»á¾ö¶¨ÊÇ·ñÖ´ĞĞÄ¿±ê·½·¨
-	//»·ÈÆÍ¨Öª±ØĞëÓĞ·µ»ØÖµ£¬·µ»ØÖµ¼´ÎªÄ¿±ê·½·¨µÄ·µ»ØÖµ
+	//ç¯ç»•é€šçŸ¥é¡»æºå¸¦ProceedingJoinPointç±»å‹çš„å‚æ•°
+	//ç¯ç»•é€šçŸ¥ç±»ä¼¼äºåŠ¨æ€ä»£ç†çš„å®ç°ï¼šProceedingJoinPointä¼šå†³å®šæ˜¯å¦æ‰§è¡Œç›®æ ‡æ–¹æ³•
+	//ç¯ç»•é€šçŸ¥å¿…é¡»æœ‰è¿”å›å€¼ï¼Œè¿”å›å€¼å³ä¸ºç›®æ ‡æ–¹æ³•çš„è¿”å›å€¼
 	//@Around("execution(public int com.sun.spring.example.beans.aop.ArithmeticCalculatorImpl.*(int,int))")
 	@Around(value="declearPointcutExpression2()")
 	public Object aroundMethod(ProceedingJoinPoint pjp){
@@ -117,20 +117,20 @@ public class LoggingAspect {
 		String methodName = pjp.getSignature().getName();
 		
 		try{
-			//Ç°ÖÃÍ¨Öª
+			//å‰ç½®é€šçŸ¥
 			System.out.println("Aound method ==> The before method '" +methodName+ "' begin with " + Arrays.asList(pjp.getArgs()));
 			
-			//Ö´ĞĞ·½·¨
+			//æ‰§è¡Œæ–¹æ³•
 			result = pjp.proceed();
 			
-			//ºóÖÃÍ¨Öª
+			//åç½®é€šçŸ¥
 			System.out.println("Aound method ==> The after method '" +methodName+ "' result: " + result);
 		}catch(Throwable e){
-			//Òì³£Í¨Öª
+			//å¼‚å¸¸é€šçŸ¥
 			System.out.println("Aound method ==> The after throwing method '" +methodName+ "' exception: " + e.toString());
 		}
 		
-		//·µ»ØÍ¨Öª
+		//è¿”å›é€šçŸ¥
 		System.out.println("Aound method ==> The returning method '" + methodName + "'");
 		
 		return result;

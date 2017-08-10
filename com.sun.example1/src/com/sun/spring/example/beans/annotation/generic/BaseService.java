@@ -5,10 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class BaseService<T> {
 	
 	/**
-	 * ·ºÐÍÒÀÀµ×¢Èë
-	 * --ÔÚ¸¸ÀàÖÐÊ¹ÓÃ×Ô¶¯×°Åä
-	 * --ÔÚÔËÐÐÊ±£¬¸¸Àà»á¸ù¾Ý¼Ì³ÐµÄ×ÓÀà£¨ÕâÀïÖ¸UserService»òRoleService£©µÄ<T>Ö¸¶¨µÄ²ÎÊý
-	 *   ×Ô¶¯×¢Èë¶ÔÓ¦µÄ×ÓÀàÀàÐÍ£¨UserDao»òRoleDao£©
+	 * æ³›åž‹ä¾èµ–æ³¨å…¥
+	 * --åœ¨çˆ¶ç±»ä¸­ä½¿ç”¨è‡ªåŠ¨è£…é…
+	 * --åœ¨è¿è¡Œæ—¶ï¼Œçˆ¶ç±»ä¼šæ ¹æ®ç»§æ‰¿çš„å­ç±»ï¼ˆè¿™é‡ŒæŒ‡UserServiceæˆ–RoleServiceï¼‰çš„<T>æŒ‡å®šçš„å‚æ•°
+	 *   è‡ªåŠ¨æ³¨å…¥å¯¹åº”çš„å­ç±»ç±»åž‹ï¼ˆUserDaoæˆ–RoleDaoï¼‰
 	 */
 	@Autowired
 	private BaseDao<T> dao;

@@ -10,20 +10,20 @@ import com.sun.spring.example.beans.annotation.UserRepository;
 public class UserController {
 
 	/**
-	 * @Authowired ×¢½â×Ô¶¯×°Åä¾ßÓĞ¼æÈİÀàĞÍµÄµ¥¸ö BeanÊôĞÔ
-	     --¹¹ÔìÆ÷, ÆÕÍ¨×Ö¶Î(¼´Ê¹ÊÇ·Ç public), Ò»ÇĞ¾ßÓĞ²ÎÊıµÄ·½·¨¶¼¿ÉÒÔÓ¦ÓÃ@Authwired ×¢½â
-	     --Ä¬ÈÏÇé¿öÏÂ, ËùÓĞÊ¹ÓÃ @Authwired ×¢½âµÄÊôĞÔ¶¼ĞèÒª±»ÉèÖÃ. µ± Spring ÕÒ²»µ½Æ¥ÅäµÄ Bean ×°ÅäÊôĞÔÊ±, »áÅ×³öÒì³£, ÈôÄ³Ò»ÊôĞÔÔÊĞí²»±»ÉèÖÃ, ¿ÉÒÔÉèÖÃ @Authwired ×¢½âµÄ required ÊôĞÔÎª false
-	     --Ä¬ÈÏÇé¿öÏÂ, µ± IOC ÈİÆ÷Àï´æÔÚ¶à¸öÀàĞÍ¼æÈİµÄ Bean Ê±, Í¨¹ıÀàĞÍµÄ×Ô¶¯×°Åä½«ÎŞ·¨¹¤×÷. ´ËÊ±¿ÉÒÔÔÚ @Qualifier ×¢½âÀïÌá¹© Bean µÄÃû³Æ. Spring ÔÊĞí¶Ô·½·¨µÄÈë²Î±ê×¢ @Qualifiter ÒÔÖ¸¶¨×¢Èë Bean µÄÃû³Æ
-	     --@Authwired ×¢½âÒ²¿ÉÒÔÓ¦ÓÃÔÚÊı×éÀàĞÍµÄÊôĞÔÉÏ, ´ËÊ± Spring ½«»á°ÑËùÓĞÆ¥ÅäµÄ Bean ½øĞĞ×Ô¶¯×°Åä.
-	     --@Authwired ×¢½âÒ²¿ÉÒÔÓ¦ÓÃÔÚ¼¯ºÏÊôĞÔÉÏ, ´ËÊ± Spring ¶ÁÈ¡¸Ã¼¯ºÏµÄÀàĞÍĞÅÏ¢, È»ºó×Ô¶¯×°ÅäËùÓĞÓëÖ®¼æÈİµÄ Bean. 
-	     --@Authwired ×¢½âÓÃÔÚ java.util.Map ÉÏÊ±, Èô¸Ã Map µÄ¼üÖµÎª String, ÄÇÃ´ Spring ½«×Ô¶¯×°ÅäÓëÖ® Map ÖµÀàĞÍ¼æÈİµÄ Bean, ´ËÊ± Bean µÄÃû³Æ×÷Îª¼üÖµ
+	 * @Authowired æ³¨è§£è‡ªåŠ¨è£…é…å…·æœ‰å…¼å®¹ç±»å‹çš„å•ä¸ª Beanå±æ€§
+	     --æ„é€ å™¨, æ™®é€šå­—æ®µ(å³ä½¿æ˜¯é public), ä¸€åˆ‡å…·æœ‰å‚æ•°çš„æ–¹æ³•éƒ½å¯ä»¥åº”ç”¨@Authwired æ³¨è§£
+	     --é»˜è®¤æƒ…å†µä¸‹, æ‰€æœ‰ä½¿ç”¨ @Authwired æ³¨è§£çš„å±æ€§éƒ½éœ€è¦è¢«è®¾ç½®. å½“ Spring æ‰¾ä¸åˆ°åŒ¹é…çš„ Bean è£…é…å±æ€§æ—¶, ä¼šæŠ›å‡ºå¼‚å¸¸, è‹¥æŸä¸€å±æ€§å…è®¸ä¸è¢«è®¾ç½®, å¯ä»¥è®¾ç½® @Authwired æ³¨è§£çš„ required å±æ€§ä¸º false
+	     --é»˜è®¤æƒ…å†µä¸‹, å½“ IOC å®¹å™¨é‡Œå­˜åœ¨å¤šä¸ªç±»å‹å…¼å®¹çš„ Bean æ—¶, é€šè¿‡ç±»å‹çš„è‡ªåŠ¨è£…é…å°†æ— æ³•å·¥ä½œ. æ­¤æ—¶å¯ä»¥åœ¨ @Qualifier æ³¨è§£é‡Œæä¾› Bean çš„åç§°. Spring å…è®¸å¯¹æ–¹æ³•çš„å…¥å‚æ ‡æ³¨ @Qualifiter ä»¥æŒ‡å®šæ³¨å…¥ Bean çš„åç§°
+	     --@Authwired æ³¨è§£ä¹Ÿå¯ä»¥åº”ç”¨åœ¨æ•°ç»„ç±»å‹çš„å±æ€§ä¸Š, æ­¤æ—¶ Spring å°†ä¼šæŠŠæ‰€æœ‰åŒ¹é…çš„ Bean è¿›è¡Œè‡ªåŠ¨è£…é….
+	     --@Authwired æ³¨è§£ä¹Ÿå¯ä»¥åº”ç”¨åœ¨é›†åˆå±æ€§ä¸Š, æ­¤æ—¶ Spring è¯»å–è¯¥é›†åˆçš„ç±»å‹ä¿¡æ¯, ç„¶åè‡ªåŠ¨è£…é…æ‰€æœ‰ä¸ä¹‹å…¼å®¹çš„ Bean. 
+	     --@Authwired æ³¨è§£ç”¨åœ¨ java.util.Map ä¸Šæ—¶, è‹¥è¯¥ Map çš„é”®å€¼ä¸º String, é‚£ä¹ˆ Spring å°†è‡ªåŠ¨è£…é…ä¸ä¹‹ Map å€¼ç±»å‹å…¼å®¹çš„ Bean, æ­¤æ—¶ Bean çš„åç§°ä½œä¸ºé”®å€¼
 	 */
 	
 	/**
-	 * @Autowire¿ÉÒÔ·ÅÔÚprivate»òpublic×Ö¶ÎÉÏÃæ£¬¼´Ê¹Ã»ÓĞset·½·¨Ò²¿ÉÒÔ¹¤×÷ (¿ÉÒÔ³¢ÊÔ°ÑÏÂÃæµÄset·½·¨É¾µô)
+	 * @Autowireå¯ä»¥æ”¾åœ¨privateæˆ–publicå­—æ®µä¸Šé¢ï¼Œå³ä½¿æ²¡æœ‰setæ–¹æ³•ä¹Ÿå¯ä»¥å·¥ä½œ (å¯ä»¥å°è¯•æŠŠä¸‹é¢çš„setæ–¹æ³•åˆ æ‰)
 	 */
 	@Autowired
-	@Qualifier("userRepository")  //Èç¹û×°ÅäµÄbeanºÍÊôĞÔÃû²»ÏàÍ¬£¬¿ÉÒÔ¶ÔËùÒª×°ÅäµÄbeanÊµÀıµÄÃû×Ö½øĞĞÖ¸¶¨£¬Ê¹ÓÃQulifier½øĞĞÖ¸¶¨
+	@Qualifier("userRepository")  //å¦‚æœè£…é…çš„beanå’Œå±æ€§åä¸ç›¸åŒï¼Œå¯ä»¥å¯¹æ‰€è¦è£…é…çš„beanå®ä¾‹çš„åå­—è¿›è¡ŒæŒ‡å®šï¼Œä½¿ç”¨Qulifierè¿›è¡ŒæŒ‡å®š
 	private UserRepository userRepository;
 	
 	public void execute(){
@@ -32,11 +32,11 @@ public class UserController {
 	}
 	
 	/**
-	 * @Autowired¿ÉÒÔ·ÅÔÚset·½·¨ÉÏÃæ
+	 * @Autowiredå¯ä»¥æ”¾åœ¨setæ–¹æ³•ä¸Šé¢
 	 */
 	@Autowired
 	public void setUserRepository(UserRepository userRepository) {
-//	public void setUserRepository(@Qualifier("userRepository") UserRepository userRepository) { //QualifierÒ²¿ÉÒÔÖ±½Ó·ÅÔÚÈë²ÎÖĞ
+//	public void setUserRepository(@Qualifier("userRepository") UserRepository userRepository) { //Qualifierä¹Ÿå¯ä»¥ç›´æ¥æ”¾åœ¨å…¥å‚ä¸­
 		this.userRepository = userRepository;
 	}
 	

@@ -6,21 +6,21 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 public class Main {
 
 	public static void main(String[] args) {
-		//1. 获取IOC容器
+		//1. 鑾峰彇IOC瀹瑰櫒
 		ApplicationContext ctx = new ClassPathXmlApplicationContext("beans-aop-annotation.xml");
 		
-		//2. 获取bean实例
+		//2. 鑾峰彇bean瀹炰緥
 		ArithmeticCalculator arithmeticCalculator = ctx.getBean(ArithmeticCalculator.class);
 		//ArithmeticCalculator arithmeticCalculator = (ArithmeticCalculator) ctx.getBean("arithmeticCalculatorImpl");
 		
-		//3. 调用bean实例方法
+		//3. 璋冪敤bean瀹炰緥鏂规硶
 		int result = arithmeticCalculator.add(5, 6);
 		System.out.println("Result: " + result);
 		
 		result = arithmeticCalculator.div(6, 3);
 		System.out.println("Result: " + result);
 		
-		//4. 异常实例，验证是否会调用后置通知
+		//4. 寮傚父瀹炰緥锛岄獙璇佹槸鍚︿細璋冪敤鍚庣疆閫氱煡
 //		result = arithmeticCalculator.div(100, 0);
 //		System.out.println("Result: " + result);
 		

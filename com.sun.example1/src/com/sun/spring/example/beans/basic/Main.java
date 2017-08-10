@@ -7,26 +7,26 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Main {
 	public static void main(String[] args) {
-		//1. ´´½¨SpringµÄIOCÈİÆ÷
-		//ApplicationContext:´ú±íIOCÈİÆ÷£¬ÔÚ´´½¨BeanÊµÀıÖ®Ç°£¬±ØĞëÏÈ³õÊ¼»¯IOCÈİÆ÷
-		//ClassPathXMLApplicationContext:ÊÇApplicaitonContextµÄÊµÏÖÀà£¬¿ÉÒÔ´ÓÀàÂ·¾¶ÏÂ¼ÓÔØÅäÖÃÎÄ¼ş
+		//1. åˆ›å»ºSpringçš„IOCå®¹å™¨
+		//ApplicationContext:ä»£è¡¨IOCå®¹å™¨ï¼Œåœ¨åˆ›å»ºBeanå®ä¾‹ä¹‹å‰ï¼Œå¿…é¡»å…ˆåˆå§‹åŒ–IOCå®¹å™¨
+		//ClassPathXMLApplicationContext:æ˜¯ApplicaitonContextçš„å®ç°ç±»ï¼Œå¯ä»¥ä»ç±»è·¯å¾„ä¸‹åŠ è½½é…ç½®æ–‡ä»¶
 		ApplicationContext context = new ClassPathXmlApplicationContext("beans-basic.xml");
 		
-		//2. ´ÓIOCÈİÆ÷»ñÈ¡beanÊµÀı
-		//   ÀûÓÃid¶¨Î»µ½IOCÈİÆ÷ÖĞµÄBean
+		//2. ä»IOCå®¹å™¨è·å–beanå®ä¾‹
+		//   åˆ©ç”¨idå®šä½åˆ°IOCå®¹å™¨ä¸­çš„Bean
 		System.out.println();
-		System.out.println("ÀûÓÃID»ñÈ¡IOCÈİÆ÷ÖĞµÄBean");
+		System.out.println("åˆ©ç”¨IDè·å–IOCå®¹å™¨ä¸­çš„Bean");
 		HelloWorld helloWorld = (HelloWorld) context.getBean("helloWorld");
 		
-		//ÀûÓÃÀàĞÍ·µ»ØIOCÈİÆ÷ÖĞµÄbean£¬µ«ÒªÇóIOCÈİÆ÷ÖĞ±ØĞëÖ»ÄÜÓĞÒ»¸ö¸ÃÀàĞÍµÄbean
+		//åˆ©ç”¨ç±»å‹è¿”å›IOCå®¹å™¨ä¸­çš„beanï¼Œä½†è¦æ±‚IOCå®¹å™¨ä¸­å¿…é¡»åªèƒ½æœ‰ä¸€ä¸ªè¯¥ç±»å‹çš„bean
 		//HelloWorld helloWorld = context.getBean(HelloWorld.class);
 		
-		//3. µ÷ÓÃhello·½·¨
+		//3. è°ƒç”¨helloæ–¹æ³•
 		helloWorld.helloWorld();
 		
-		//4. ²âÊÔ¹¹Ôìº¯ÊıµÄ²»Í¬ĞÎÊ½£¬»ñÈ¡CarÊµÀı£¬ÏêÏ¸ÅäÖÃĞÎÊ½Çë²Î¼ûÅäÖÃÎÄ¼ş
+		//4. æµ‹è¯•æ„é€ å‡½æ•°çš„ä¸åŒå½¢å¼ï¼Œè·å–Carå®ä¾‹ï¼Œè¯¦ç»†é…ç½®å½¢å¼è¯·å‚è§é…ç½®æ–‡ä»¶
 		System.out.println();
-		System.out.println("²âÊÔ¹¹Ôìº¯Êıµ÷ÓÃµÄ²»Í¬ĞÎÊ½");
+		System.out.println("æµ‹è¯•æ„é€ å‡½æ•°è°ƒç”¨çš„ä¸åŒå½¢å¼");
 		Car car1 = (Car)context.getBean("car1");
 		System.out.println(car1);
 		
@@ -39,59 +39,59 @@ public class Main {
 		Car car4 = (Car)context.getBean("car4");
 		System.out.println(car4);
 		
-		//5. ²âÊÔrefÊôĞÔ, ÆäÖĞÒıÓÃµÄcarÊ¹ÓÃref·½Ê½½øĞĞµ÷ÓÃ
+		//5. æµ‹è¯•refå±æ€§, å…¶ä¸­å¼•ç”¨çš„carä½¿ç”¨refæ–¹å¼è¿›è¡Œè°ƒç”¨
 		System.out.println();
-		System.out.println("²âÊÔrefÊôĞÔ");
+		System.out.println("æµ‹è¯•refå±æ€§");
 		Person person1 = (Person) context.getBean("person1");
 		System.out.println(person1);
 		
-		//6. ²âÊÔÄÚ²¿bean£¬ÆäÖĞÒıÓÃµÄcarÊ¹ÓÃÄÚ²¿beanµÄ·½Ê½½øĞĞµ÷ÓÃ
+		//6. æµ‹è¯•å†…éƒ¨beanï¼Œå…¶ä¸­å¼•ç”¨çš„carä½¿ç”¨å†…éƒ¨beançš„æ–¹å¼è¿›è¡Œè°ƒç”¨
 		System.out.println();
-		System.out.println("²âÊÔÄÚ²¿Bean");
+		System.out.println("æµ‹è¯•å†…éƒ¨Bean");
 		Person person2 = (Person) context.getBean("person2");
 		System.out.println(person2);
 		
-		//7. ²âÊÔ¼¯ºÏÊôĞÔ£¬ÎªµØÖ·Ëù±íÊ¾µÄ¼¯ºÏÀàĞÍ¸³Öµ
+		//7. æµ‹è¯•é›†åˆå±æ€§ï¼Œä¸ºåœ°å€æ‰€è¡¨ç¤ºçš„é›†åˆç±»å‹èµ‹å€¼
 		System.out.println();
-		System.out.println("²âÊÔ¼¯ºÏÊôĞÔ");
+		System.out.println("æµ‹è¯•é›†åˆå±æ€§");
 		Person person3 = (Person) context.getBean("person3");
 		System.out.println(person3);
 		
-		//8. ²âÊÔ¼¯ºÏÀàĞÍµÄbean£¬²âÊÔÈçºÎÊ¹ÓÃ¼¯ºÏÀàĞÍµÄbean
-		//   ²âÊÔÈçºÎÊ¹ÓÃpÊôĞÔ
-		//   ²âÊÔÈçºÎÊ¹ÓÃbeanµÄ¼Ì³Ğ
+		//8. æµ‹è¯•é›†åˆç±»å‹çš„beanï¼Œæµ‹è¯•å¦‚ä½•ä½¿ç”¨é›†åˆç±»å‹çš„bean
+		//   æµ‹è¯•å¦‚ä½•ä½¿ç”¨på±æ€§
+		//   æµ‹è¯•å¦‚ä½•ä½¿ç”¨beançš„ç»§æ‰¿
 		System.out.println();
-		System.out.println("²âÊÔ½áºÏÀàµÄbean\n²âÊÔPÊôĞÔ\n²âÊÔÈçºÎÊ¹ÓÃbeanµÄ¼Ì³Ğ");
+		System.out.println("æµ‹è¯•ç»“åˆç±»çš„bean\næµ‹è¯•På±æ€§\næµ‹è¯•å¦‚ä½•ä½¿ç”¨beançš„ç»§æ‰¿");
 		Person person4 = (Person) context.getBean("person4");
 		System.out.println(person4);
 		
-		//9. ÊµÀı»¯Ò»¸öbeanµÄtemplate
-		//   ²»ÄÜÊµÀı»¯£¬±¨´í£¡£¡
+		//9. å®ä¾‹åŒ–ä¸€ä¸ªbeançš„template
+		//   ä¸èƒ½å®ä¾‹åŒ–ï¼ŒæŠ¥é”™ï¼ï¼
 		//Address addressTemplate = (Address) context.getBean("addressTemplate");
 		//System.out.println(addressTemplate);
 		
-		//10. ²âÊÔ¼¶ÁªÊôĞÔ
+		//10. æµ‹è¯•çº§è”å±æ€§
 		System.out.println();
-		System.out.println("ÉèÖÃ¼¶ÁªÊôĞÔ");
+		System.out.println("è®¾ç½®çº§è”å±æ€§");
 		Person person5 = (Person) context.getBean("person5");
 		System.out.println(person5);
 		
-		//11. ²âÊÔÑÓ³Ù¼ÓÔØ
+		//11. æµ‹è¯•å»¶è¿ŸåŠ è½½
 		System.out.println();
-		System.out.println("²âÊÔÑÓ³Ù¼ÓÔØºÍÒÀÀµ£¬Car8±ÈCar7ÏÈ³õÊ¼»¯");
+		System.out.println("æµ‹è¯•å»¶è¿ŸåŠ è½½å’Œä¾èµ–ï¼ŒCar8æ¯”Car7å…ˆåˆå§‹åŒ–");
 		Car car7 = (Car) context.getBean("car7");
 		System.out.println(car7);
 		
-		//12. ²âÊÔ×Ô¶¯×°Åä
+		//12. æµ‹è¯•è‡ªåŠ¨è£…é…
 		System.out.println();
-		System.out.println("²âÊÔ×Ô¶¯×°Åä");
+		System.out.println("æµ‹è¯•è‡ªåŠ¨è£…é…");
 		Person person7 = (Person) context.getBean("person7");
 		System.out.println(person7);
 		
-		//13. ²âÊÔÅäÖÃbeanµÄ×÷ÓÃÓò
-		//²âÊÔSingletonÀàĞÍµÄbean
+		//13. æµ‹è¯•é…ç½®beançš„ä½œç”¨åŸŸ
+		//æµ‹è¯•Singletonç±»å‹çš„bean
 		System.out.println();
-		System.out.println("²âÊÔSingletonÀàĞÍµÄbean");
+		System.out.println("æµ‹è¯•Singletonç±»å‹çš„bean");
 		Car car8_1 = (Car) context.getBean("car8");
 		Car car8_2 = (Car) context.getBean("car8");
 		System.out.println("Scope: Singleton beans comparsion result: car8_1 " + (car8_1==car8_2?"=":"!=") + " car8_2");
@@ -99,50 +99,50 @@ public class Main {
 		Car car9_2 = (Car) context.getBean("car9");
 		System.out.println("Scope: Prototype beans comparsion result: car9_1 " + (car9_1==car9_2?"=":"!=") + " car9_2");
 
-		//14. ²âÊÔÍâ²¿ÊôĞÔÎÄ¼ş
-		//Íâ²¿ÊôĞÔÎÄ¼ş£ºdatabase.properties
+		//14. æµ‹è¯•å¤–éƒ¨å±æ€§æ–‡ä»¶
+		//å¤–éƒ¨å±æ€§æ–‡ä»¶ï¼šdatabase.properties
 		System.out.println();
-		System.out.println("²âÊÔÍâ²¿ÊôĞÔÎÄ¼ş");
+		System.out.println("æµ‹è¯•å¤–éƒ¨å±æ€§æ–‡ä»¶");
 		DataSource dataSource = (DataSource) context.getBean("datasource");
 		System.out.println(dataSource);
 		
-		//15. ²âÊÔSpEL
+		//15. æµ‹è¯•SpEL
 		System.out.println();
-		System.out.println("²âÊÔSpEL");
+		System.out.println("æµ‹è¯•SpEL");
 		User user1 = (User) context.getBean("user1");
 		System.out.println(user1);
 		
-		//16. ²âÊÔbeanµÄÉúÃüÖÜÆÚ(init-method and destroy-method)
-		//×¢ÒâuserÖĞ¸÷¸ö·½·¨µÄµ÷ÓÃË³Ğò
+		//16. æµ‹è¯•beançš„ç”Ÿå‘½å‘¨æœŸ(init-method and destroy-method)
+		//æ³¨æ„userä¸­å„ä¸ªæ–¹æ³•çš„è°ƒç”¨é¡ºåº
 		System.out.println();
-		System.out.println("²âÊÔbeanµÄÉúÃüÖÜÆÚ(init-method and destroy-method)");
+		System.out.println("æµ‹è¯•beançš„ç”Ÿå‘½å‘¨æœŸ(init-method and destroy-method)");
 		User user2 = (User) context.getBean("user2");
 		System.out.println(user2);
 		
-		//17. ²âÊÔbeanµÄÉúÃüÖÜÆÚ(postProcessBeforeInitialzation and postProcessAfterInitialzation)
-		//×¢ÒâuserÖĞ¸÷¸ö·½·¨µÄµ÷ÓÃË³Ğò
+		//17. æµ‹è¯•beançš„ç”Ÿå‘½å‘¨æœŸ(postProcessBeforeInitialzation and postProcessAfterInitialzation)
+		//æ³¨æ„userä¸­å„ä¸ªæ–¹æ³•çš„è°ƒç”¨é¡ºåº
 		System.out.println();
-		System.out.println("²âÊÔbeanµÄÉúÃüÖÜÆÚ(postProcessBeforeInitialzation and postProcessAfterInitialzation)");
+		System.out.println("æµ‹è¯•beançš„ç”Ÿå‘½å‘¨æœŸ(postProcessBeforeInitialzation and postProcessAfterInitialzation)");
 		User user3 = (User) context.getBean("user3");
 		System.out.println(user3);
 		
-		//18. ²âÊÔbeanµÄ¹¤³§·½·¨
+		//18. æµ‹è¯•beançš„å·¥å‚æ–¹æ³•
 		System.out.println();
-		System.out.println("²âÊÔbeanµÄ¹¤³§·½·¨");
+		System.out.println("æµ‹è¯•beançš„å·¥å‚æ–¹æ³•");
 		User user5 = (User)context.getBean("user5");
 		System.out.println(user5);
 		User user6 = (User)context.getBean("user6");
 		System.out.println(user6);
 		
-		//19. ²âÊÔFactoryBeanµÄÓÃ·¨
+		//19. æµ‹è¯•FactoryBeançš„ç”¨æ³•
 		System.out.println();
-		System.out.println("²âÊÔFactoryBeanµÄÓÃ·¨");
+		System.out.println("æµ‹è¯•FactoryBeançš„ç”¨æ³•");
 		User user7 = (User) context.getBean("user7");
 		System.out.println(user7);
 		
-		//Ïú»ÙIOCÈİÆ÷ÖĞµÄbeanÊµÀı²¢¹Ø±ÕIOCÈİÆ÷
+		//é”€æ¯IOCå®¹å™¨ä¸­çš„beanå®ä¾‹å¹¶å…³é—­IOCå®¹å™¨
 		System.out.println();
-		System.out.println("Ïú»ÙBean");
+		System.out.println("é”€æ¯Bean");
 		((ClassPathXmlApplicationContext)context).close();
 	}
 	

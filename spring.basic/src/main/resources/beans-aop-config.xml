@@ -8,18 +8,18 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
 	
 	<!-- 配置bean -->
-	<bean id="arithmethicCalculator" class="com.sun.spring.example.beans.aop.config.ArithmeticCalculatorImpl"></bean>	
+	<bean id="arithmethicCalculator" class="com.sun.example.spring.aop.config.ArithmeticCalculatorImpl"></bean>	
 	
 	<!-- 配置切面bean -->
-	<bean id="loggingAspect" class="com.sun.spring.example.beans.aop.config.LoggingAspect"></bean>
-	<bean id="validationAspect" class="com.sun.spring.example.beans.aop.config.ValidationAspect"></bean>	
+	<bean id="loggingAspect" class="com.sun.example.spring.aop.config.LoggingAspect"></bean>
+	<bean id="validationAspect" class="com.sun.example.spring.aop.config.ValidationAspect"></bean>	
 	
 	<!-- 配置AOP -->
 	<aop:config>
 		<!-- 配置切点表达式 -->
-		<aop:pointcut expression="execution(public int com.sun.spring.example.beans.aop.config.ArithmeticCalculatorImpl.*(int,int))" 
+		<aop:pointcut expression="execution(public int com.sun.example.spring.aop.config.ArithmeticCalculatorImpl.*(int,int))" 
 			id="pointcut1"/>
-		<aop:pointcut expression="execution(public double com.sun.spring.example.beans.aop.config.ArithmeticCalculatorImpl.*(int,int))" 
+		<aop:pointcut expression="execution(public double com.sun.example.spring.aop.config.ArithmeticCalculatorImpl.*(int,int))" 
 		 	id="pointcut2"/>
 		 	
 		<!-- 配置切面 -->

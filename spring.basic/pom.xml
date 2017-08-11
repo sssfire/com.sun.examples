@@ -52,6 +52,7 @@
 		<javax.servlet-api.version>3.1.0</javax.servlet-api.version>
 		<spring.version>4.3.9.RELEASE</spring.version>
 		<spring-data-jpa.version>1.11.4.RELEASE</spring-data-jpa.version>
+		<activemq.version>5.7.0</activemq.version>
 		<cxf-rt-frontend-jaxrs.version>2.7.18</cxf-rt-frontend-jaxrs.version>
 		<!-- <httpclient.version>4.5.2</httpclient.version> <httpcore.version>4.4.5</httpcore.version> 
 			 <cmis.version>1.0.0</cmis.version> 
@@ -264,6 +265,13 @@
     		<groupId>com.mchange</groupId>
    			<artifactId>c3p0</artifactId>
     		<version>${c3p0.version}</version>
+		</dependency>
+		
+		<!-- ActiveMQ -->
+		<dependency>
+    		<groupId>org.apache.activemq</groupId>
+   			<artifactId>activemq-core</artifactId>
+    		<version>${activemq.version}</version>
 		</dependency>
 	</dependencies>
 

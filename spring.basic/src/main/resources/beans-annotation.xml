@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- 指定Spring IOC容器扫描的包 -->
+	<!-- 
+		base-package: 指定IOC容器扫描的package，指定的package和其子package都会被IOC容器扫描
+		下面四种类型的annotation所标识的bean将会被扫描并被IOC容器管理，这是种类型没有区别
+		@Component
+		@Service
+		@Controller
+		@Repository
+	 -->
+	<!-- 扫描annotation包以及子包 -->
+	<context:component-scan 
+		base-package="com.sun.example.spring.annotation"></context:component-scan>
+
+	<!--
+	 	resource-pattern: 指定需要扫描哪些资源，这些class使用pattern进行描述，默认是**/**.class
+ 	 -->
+	<!-- 扫描annotation包下repository子包中的类，因此其他包中的类不会被扫描到 -->	
+	<!-- 
+	<context:component-scan 
+		base-package="com.sun.example.spring"
+		resource-pattern="repository/*.class"></context:component-scan>
+	 -->
+	 
+	<!--
+		通过context:exclude-filter设置过滤哪些资源，通过该过滤器所有指定的资源将会被排除掉
+		type有以下几种常用类型可以使用：
+		annotation: 如果type为annotation，则expression需要指定根据哪些annotation进行过滤，匹配了的annotation所对应的类会被过滤掉。
+		assignable: 如果type为assignable，则experssion需要指定根据哪些指定的资源进行过滤，匹配的资源会被过滤掉。
+	 -->
+	<!-- 所有annotation指定为org.springframework.stereotype.Repository的类会被过滤掉，此处UserRepository将不可见 -->
+	<!-- 
+	<context:component-scan 
+		base-package="com.sun.example.spring">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+	-->
+	<!-- 所有接口为UserRepository的实现类类会被过滤掉，此处UserRepositoryImp将不可见 -->
+	<!--
+	<context:component-scan 
+		base-package="com.sun.example.spring">
+		<context:exclude-filter type="assignable" expression="com.sun.example.spring.UserRepository"/>
+	</context:component-scan>
+	-->
+	
+	<!--
+		通过context:include-filter设置只包含哪些资源，其他未指定的资源将会被排除掉
+		使用include-filter时，需要在component-scan中指定use-default-filters为false(默认为true)，以表明只是用该过滤器
+		type和exclude-filter相同
+	 -->
+	<!-- 仅仅annotation指定为org.springframework.stereotype.Repository的类会包含进IOC容器，其他类会被过滤掉 -->
+	<!-- 
+	<context:component-scan 
+		base-package="com.sun.example.spring"
+		use-default-filters="false">
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+	</context:component-scan>
+ 	-->
+</beans>

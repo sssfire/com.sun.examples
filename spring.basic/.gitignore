@@ -1,0 +1,13 @@
+src/main/webapp/WEB-INF/lib
+target
+/bin
+/.apt_generated/
+
+*.class
+*.jar
+*.war
+*.ear
+*.log
+.settings
+.classpath
+.project

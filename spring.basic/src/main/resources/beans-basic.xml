@@ -1,0 +1,327 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- 在beans中定义的属性会作用于整个配置文件，但配置文件中的定义会覆盖beans中的定义 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.2.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd">
+
+	<!-- 
+		配置 bean
+		class: bean的全类名，通过反射方式在IOC容器中创建Bean，所以要求Bean中必须有无参数的构造器
+		id: 标识容器中的bean，id是唯一的
+	 -->
+	<bean id="helloWorld" class="com.sun.example.spring.basic.HelloWorld">
+		<!-- 通过属性注入 -->
+		<property name="name" value="Spring"></property>
+	</bean>
+	
+	<!-- 通过构造方法来配置bean的属性，通过index指定参数属性，默认调用第一个匹配的构造函数 -->
+	<bean id="car1" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="Audi1" index="0"></constructor-arg>
+		<constructor-arg value="Shanghai" index="1"></constructor-arg>
+		<constructor-arg value="3000000" index="2"></constructor-arg>
+	</bean>
+	
+	<!-- 通过匹配参数名称调用相应的构造函数 -->
+	<bean id="car2" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="Audi2" name="brand"></constructor-arg>
+		<constructor-arg value="Shanghai" name="corp"></constructor-arg>
+		<constructor-arg value="280" name="maxSpeed"></constructor-arg>
+	</bean>
+	
+	<!-- 通过匹配参数类型调用相应的构造函数 -->
+	<bean id="car3" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="Audi3" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="Shanghai" type="java.lang.String"></constructor-arg>
+		<constructor-arg value="280" type="int"></constructor-arg>
+	</bean>
+	
+	<!-- 可以混合使用不同的参数构造形式以匹配相应的构造函数 -->
+	<!-- 如果字面值使用到特殊字符，可以使用<![CDATA[]]>把属性的字面值包裹起来, 该处理必须放到<value>属性中 -->
+	<bean id="car4" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="Audi4" type="java.lang.String"></constructor-arg>
+		<constructor-arg index="1">
+			<value> <![CDATA["<Shanghai^']]></value>
+		</constructor-arg>
+		<constructor-arg value="280" name="maxSpeed"></constructor-arg>
+	</bean>
+
+	<!-- 可以通过<ref>元素或ref属性引用bean -->
+	<!-- 可以在property或者constructor-arg中使用 -->
+	<bean id="person1" class="com.sun.example.spring.basic.Person">
+		<property name="name" value="小王"></property>
+		<property name="car">
+			<ref bean="car4"/>
+		</property>
+		<!-- 下面的方式更加简洁 -->
+		<!--  
+			<property name="car" ref="car4"></property> 
+		-->
+	</bean>
+	
+	<!-- 可以通过定义内部Bean对bean进行赋值 -->
+	<!-- 
+		-当 Bean 实例仅仅给一个特定的属性使用时, 可以将其声明为内部 Bean. 
+	    -内部 Bean 声明直接包含在 <property> 或 <constructor-arg> 元素里.
+	    -不需要设置任何 id 或 name 属性.
+	    -内部 Bean 不能使用在任何其他地方.
+ 	-->
+	<bean id="person2" class="com.sun.example.spring.basic.Person">
+		<property name="name" value="小李"></property>
+		<property name="car">
+			<bean class="com.sun.example.spring.basic.Car">
+				<constructor-arg value="Ford"></constructor-arg>
+				<constructor-arg value="Shanghai"></constructor-arg>
+				<constructor-arg value="3000000"></constructor-arg>
+			</bean>
+		</property>
+	</bean>
+	
+	<!-- 为集合属性赋值 -->
+	<!-- 集合属性可以为List, Map, Set等 -->
+	<bean id="person3" class="com.sun.example.spring.basic.Person">
+		<property name="name" value="小李子"></property>
+		<property name="car" ref="car1"></property>
+		<property name="addresses">
+			<list>
+				<bean class="com.sun.example.spring.basic.Address">
+					<property name="country" value="China"></property>
+					<property name="city" value="Shanghai"></property>
+					<property name="street" value="Chenhui Road No. 1001"></property>
+				</bean>
+				<bean class="com.sun.example.spring.basic.Address">
+					<property name="country" value="China"></property>
+					<property name="city" value="Shanghai"></property>
+					<property name="street" value="North SiChuan Road"></property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 使用p命名空间对属性进行赋值 -->
+	<!-- 
+		必须导入p命名空间
+	 -->
+	<bean id="address1" class="com.sun.example.spring.basic.Address" 
+		  p:country="China" p:city="Shanghai" p:street="Pudong Avenue"></bean>
+	
+	<!-- Bean的继承 -->
+	<!-- 
+		parent: 使用parent对bean的属性进行继承 
+	-->
+	<bean id="address2" parent="address1" p:street="Lujiazui Road"></bean>
+	
+	<!-- 
+		abstract: 用于定义模板bean,这种类型的bean不能被实例化
+	 -->
+	<bean id="addressTemplate" abstract="true" class="com.sun.example.spring.basic.Address" 
+		  p:country="China" p:city="Shanghai" p:street="Pudong Avenue"></bean>
+	<bean id="address3" parent="addressTemplate" p:street="Dingxiang Road"></bean>
+	
+	
+	<!-- 声明集合类型的Bean -->
+	<!--
+		必须导入util命名空间 
+	 -->
+	<util:list id="addresses">
+		<ref bean="address1"></ref>
+		<ref bean="address2"></ref>
+		<ref bean="address3"></ref>
+	</util:list>
+	<bean id="person4" class="com.sun.example.spring.basic.Person"
+		p:name="小六子" p:car-ref="car4" p:addresses-ref="addresses"	></bean>
+		
+	<!-- 设置Bean的级联属性 -->
+	<bean id="car5" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="Audi"></constructor-arg>
+		<constructor-arg value="Shanghai"></constructor-arg>
+		<constructor-arg value="8000000"></constructor-arg>
+	</bean>
+	<bean id="person5" class="com.sun.example.spring.basic.Person"
+		p:name="小顺子" p:addresses-ref="addresses">
+		<property name="car" ref="car5"></property>
+		<!-- 设置级联属性 -->
+		<property name="car.brand" value="Adui A8L"></property>
+	</bean>
+
+	<!-- 设置Bean的null属性 -->
+	<bean id="car6" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="car6"></constructor-arg>
+		<constructor-arg value="Shanghai"></constructor-arg>
+		<constructor-arg value="8000000"></constructor-arg>
+	</bean>
+	<bean id="person6" class="com.sun.example.spring.basic.Person"
+		p:name="小顺子" p:addresses-ref="addresses">
+		<property name="car" ref="car6"></property>
+		<!-- 设置级联属性为null值 -->
+		<property name="car.corp"><null/></property>
+	</bean>
+	
+	<!-- 测试depends-on & Lazy-init-->
+	<!-- 虽然car8和car7没有必然的联系，当时通过depends-on属性，在实例化car7之前，必须先实例化car8 -->
+	<bean id="car7" class="com.sun.example.spring.basic.Car" depends-on="car8" lazy-init="true">
+		<constructor-arg value="car7"></constructor-arg>
+		<constructor-arg value="Shanghai"></constructor-arg>
+		<constructor-arg value="8000000"></constructor-arg>
+	</bean>
+	<bean id="car8" class="com.sun.example.spring.basic.Car" lazy-init="true">
+		<constructor-arg value="car8"></constructor-arg>
+		<constructor-arg value="Shanghai"></constructor-arg>
+		<constructor-arg value="8000000"></constructor-arg>
+	</bean>
+	
+	<!-- 自动装配：只声明Bean，而把装配关系交给IOC容器完成 -->
+	<!-- 
+		no：默认设置，IOC容器不进行自动装配，只能使用ref属性或ref标签进行装配
+		byType：根据类型进行自动装配，但要求IOC容器只能有一个匹配类型的bean，如果有多个则报错，系统提示无法完成自动装配
+		byName：根据属性的名称和某一个匹配的bean的名称进行装配，属性名称和bean名称一致可以进行装配，否则不进行装配
+		constructor：自动装配构造函数的参数，该装配根据byType进行装配。
+		
+		如果同时在bean声明中有property或constructor的显式声明，则显式声明的配置信息会覆盖自动装配的bean的信息。
+		父类autowire属性不会被子bean继承。
+	 -->
+	<bean id="car" class="com.sun.example.spring.basic.Car">
+		<constructor-arg value="VolksWagen"></constructor-arg>
+		<constructor-arg value="Shanghai"></constructor-arg>
+		<constructor-arg value="150000"></constructor-arg>
+	</bean>	
+	<!-- 自动装配car和addresses两个bean -->
+	<bean id="person7" class="com.sun.example.spring.basic.Person" p:name="小六子" autowire="byName"></bean>
+	
+	<!-- 使用scope配置Bean的作用域 -->
+	<!-- 
+		singleton：默认值，容器初始化时创建bean实例，在整个容器的生命周期中只创建这一个bean，是单例的
+		prototype：原型值，容器创建时不实例化该bean，只有在引用时才创建，每次请求时都创建一个新的实例
+	 -->
+	<bean id="car9" class="com.sun.example.spring.basic.Car" scope="prototype">
+	 	<constructor-arg name="brand" value="VolksWagen"></constructor-arg>
+		<constructor-arg name="corp"  value="Shanghai"></constructor-arg>
+		<constructor-arg name="price" value="150000"></constructor-arg>
+		<property name="maxSpeed" value="280"></property>
+	</bean>
+	
+	<!-- 导入外部资源文件 -->
+	<!-- 
+		必须需要导入context命名空间
+	 -->
+	<context:property-placeholder location="classpath:database.properties" />
+	<!-- 根据外部资源文件配置数据源 -->
+	<bean id="datasource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="user" value="${jdbc.user}"></property>
+		<property name="password" value="${jdbc.password}"></property>
+		<property name="driverClass" value="${jdbc.driverClass}"></property>
+		<property name="jdbcUrl" value="${jdbc.url}"></property>
+		<property name="initialPoolSize" value="${jdbc.initialPoolSize}"></property>
+		<property name="maxPoolSize" value="${jdbc.maxPoolSize}"></property>
+	</bean>
+		 
+
+	<!-- 测试SpEL：可以为属性动态赋值 -->
+	<!-- 
+		支持运行时查询和操作对象图
+		SpEL使用#{...}作为界定符号，注意不同于使用外部资源时所使用的界定符号${...}
+		可以实现如下功能：
+		1. 通过bean的id对bean进行应用
+		2. 调用方法以及引用对象中的属性
+		3. 计算表达式的值
+		4. 正则表达式的匹配
+	 -->
+	<bean id="user1" class="com.sun.example.spring.basic.User">
+		<!-- 使用字面量，字面量为字符串 -->
+		<property name="name" value="#{'user1'}"></property>
+		<!-- 使用其他对象的属性 -->
+		<property name="realName" value="#{person7.name}"></property>
+		<!-- 使用静态方法或静态属性 -->
+		<property name="level" value="#{T(java.lang.Math).PI}"></property>
+		<!-- 引用其他对象 -->
+		<property name="person" value="#{person7}"></property>
+		<!-- 使用表达式 -->
+		<property name="description" value="#{user1.level lt 10?'low level':'high level'}"></property>
+	</bean>
+	
+	<!-- 测试bean的生命周期 -->
+	<!-- 
+		bean的生命周期如下：
+		S1：通过IOC或工厂方法创建Bean的实例
+		S2：为Bean的属性设置值和对其方法进行引用
+		S3：调用init-method方法对bean继续初始化
+		S4：Bean可以使用了
+		S5：当容器关闭时，调用bean的destroy-method方法
+	 -->
+	<bean id="user2" parent="user1" init-method="initUser" destroy-method="destroyUser">
+		<property name="name" value="user2"></property>
+	</bean>
+	
+	<!-- 配置 bean 后置处理器 -->
+	<!-- 
+	 	不需要配置 id 属性, IOC 容器会识别到他是一个 bean 后置处理器, 并调用其方法  
+	 	bean的生命周期如下：
+	 	S1：通过IOC或工厂方法创建Bean的实例
+		S2：为Bean的属性设置值和对其方法进行引用
+		S3：调用postProcessBeforeInitialization方法
+		S4：调用init-method方法对bean继续初始化
+		S5：Bean可以使用了
+		S6：调用postProcessAfterInitialization方法
+		S7：当容器关闭时，调用bean的destroy-method方法
+	 -->
+	<bean class="com.sun.example.spring.basic.GeneralBeanPostProcessor1"></bean>
+	<bean id="user3" parent="user2" init-method="initUser" destroy-method="destroyUser">
+		<property name="name" value="user3"></property>
+	</bean>
+	<!-- 
+		初始化另一个bean的后置处理器
+		每个bean可以有自己单独的bean后置处理器，也可以使用一个通用的bean后置处理器对所有bean进行处理
+		注意：如果在不同的bean后置处理器中对同一个bean进行处理，容易引起混乱！！
+	-->
+	<bean class="com.sun.example.spring.basic.GeneralBeanPostProcessor2"></bean>
+	<bean id="user4" parent="user2" init-method="initUser" destroy-method="destroyUser">
+		<property name="name" value="user4"></property>
+	</bean>
+	
+	<!-- 通过工厂方法配置一个bean -->
+	<!-- 
+		class：指定工厂类，工厂类可以与所需要实例化的bean类型相同或者不相同，如果不相同，则返回工厂方法返回值所对应的bean类型
+		factory-method：工厂方法，如果工厂类使用class属性指定，则工厂方法必须为静态方法，如果工厂类使用factory-bean指定，这工厂方法必须为实例化方法
+		factory-bean：指定工厂bean，和class属性只能二选一，通过此处指定的工厂类可以为singleton或prototype模式，后面的factory-method属性指定的工厂方法必须是实例化方法。
+		工厂方法的参数指定：如果工厂方法带参数，需要使用<constructor-arg>注入它的值
+		bean属性的指定：可以配合<constructor-arg>，同时使用<property>注入bean的属性。
+		自动装配：不支持自动装配。
+	 -->
+	 <!-- 
+	 	通过class属性指定 
+	 	getUserInstance为静态方法
+	 -->
+	<bean id="user5" class="com.sun.example.spring.basic.UserFactory" factory-method="getUserInstance">
+		<constructor-arg name="name" value="user5"></constructor-arg>
+		<constructor-arg name="realName" value="小神仙"></constructor-arg>
+		<constructor-arg name="level" value="100"></constructor-arg>
+		<constructor-arg name="description" value="小神仙古怪精灵，造福人间"></constructor-arg>
+		<property name="person" ref="person7"></property>
+	</bean>
+	<!-- 
+		通过factory-bean属性指定 
+		getUserInstance2为非静态方法
+	-->
+	<bean id="userFactory" class="com.sun.example.spring.basic.UserFactory"></bean>
+	<bean id="user6" factory-bean="userFactory" factory-method="getUserInstance2">
+		<constructor-arg name="name" value="user6"></constructor-arg>
+		<constructor-arg name="realName" value="小神仙2号"></constructor-arg>
+		<constructor-arg name="level" value="100"></constructor-arg>
+		<constructor-arg name="description" value="小神仙古怪精灵，造福人间"></constructor-arg>
+		<property name="person" ref="person7"></property>
+	</bean>
+
+	<!-- 通过FactoryBean初始化一个Bean -->
+	<!--
+		需要继承FactoryBean接口，实现三个方法，详见UserFatoryBean的实现
+		这种方式返回的实例是FactoryBean接口中getObject()指定类型的实例
+		前置和后置处理器和普通bean一样也会起作用，详见GeneralBeanPostProcessor2的实现
+	 -->
+	<bean id="user7" class="com.sun.example.spring.basic.UserFactoryBean"></bean>
+	
+</beans>
